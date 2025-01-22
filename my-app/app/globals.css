@@ -1,0 +1,12 @@
+
+
+body {
+  color: var(--foreground);
+  margin: 0;
+  background-image: url("../public/background.png");
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main  {
+  height: 93vh;
+}
