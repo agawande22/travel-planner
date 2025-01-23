@@ -44,9 +44,9 @@ function Header() {
 
   return (
     <ThemeProvider theme={theme} >
-        <AppBar position="static" sx={{bgcolor: 'primary.light'}}>
+        <AppBar position="static" sx={{  bgcolor: 'primary.light'}}>
             <Container maxWidth="xl">
-                <Toolbar disableGutters>
+                <Toolbar>
                 <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                 <Typography
                     variant="h6"
@@ -139,10 +139,10 @@ function Header() {
                 <Box sx={{ flexGrow: 0.5 }}>
                     <Grid2 container gap={1} >
                         <Grid2 size={{ xs: 6, md: 5 }} sx={{bgcolor: "primary.main", borderRadius: 5, textAlign: 'center'}}>
-                            <Button sx={{textTransform: 'none'}} href="/signup"><Typography sx={{color: 'white'}}>Signup</Typography></Button> 
+                            <Button sx={{textTransform: 'none'}} href="/auth/signup"><Typography sx={{color: 'white'}}>Signup</Typography></Button> 
                         </Grid2>
                         <Grid2 size={{ xs: 6, md: 5 }} sx={{bgcolor: "primary.main", borderRadius: 5, textAlign: 'center'}}>
-                            <Button sx={{textTransform: 'none'}} href="/login"><Typography sx={{color: 'white', textAlign: 'center'}}>Login</Typography></Button>    
+                            <Button sx={{textTransform: 'none'}} href="/auth/signin"><Typography sx={{color: 'white', textAlign: 'center'}}>Signin</Typography></Button>    
                         </Grid2>
                     </Grid2>
                 </Box>
