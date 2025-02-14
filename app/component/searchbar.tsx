@@ -2,7 +2,7 @@
 
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { JSX, useEffect, useRef, useState } from 'react';
+import { JSX, useEffect, useState } from 'react';
 import theme from './theme';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import Grid2 from '@mui/material/Grid2';
@@ -23,7 +23,7 @@ import PlaceAutocomplete from './placeautocomplete';
 const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ||'';
 
 export default function Searchbar({color, contrast}: {color: string, contrast: string}): JSX.Element{
-  const {fromLocation, toLocation, checkIn, checkOut, guests, listOfRestaurants, listOfAttractions, updateFromLocation, updateToLocation, updateCheckIn, updateCheckOut, updateGuests, updateListOfRestaurants, updateListOfAttractions} = useSearchState();
+  const {checkIn, checkOut, guests, updateFromLocation, updateToLocation, updateCheckIn, updateCheckOut, updateGuests} = useSearchState();
   const [toPlace, setToPlace] = useState<google.maps.places.PlaceResult | null>(null);
   const [fromPlace, setFromPlace] = useState<google.maps.places.PlaceResult | null>(null);
   // const [localLocation, setLocalLocation] = useState<string|''>(place?.name || 'Unknown Place');
@@ -92,57 +92,6 @@ export default function Searchbar({color, contrast}: {color: string, contrast: s
     }     
   };
 
-  // useEffect(()=> {
-  //   const loadPlaces = async () => {
-  //     if (!window.google || !toLocation || !toLocation.geometry?.location) {
-  //       console.log('Google API not ready or no location found.');
-  //       return;
-  //     };
-  
-  //     const service = new window.google.maps.places.PlacesService(document.createElement('div'));
-  
-  //     const requestRestaurants = {
-  //       location: toLocation?.geometry?.location, 
-  //       radius: 1500, 
-  //       type: 'restaurant',
-  //       fields: ['name', 'geometry', 'icon', 'place_id', 'viscinity', 'rating', 'user_ratings_total'],
-  //     };
-  
-  //     const requestAttractions = {
-  //       location: toLocation?.geometry?.location, 
-  //       radius: 1500, 
-  //       type: 'tourist_attraction', 
-  //       fields: ['name', 'geometry', 'icon', 'place_id', 'viscinity', 'rating', 'user_ratings_total'],
-  //     };
-
-  //     try {
-  //       service.nearbySearch(requestRestaurants, (results, status) => {
-  //         if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-  //           // const filteredResults = results?.filter((place) => place.types?.includes('restaurant'));
-  //           // fetchPlaceDetails(results || [], updateListOfRestaurants);
-  //           updateListOfRestaurants(results || []);
-  //         } else {
-  //           console.log('Nearby search failed with status:', status);
-  //         }
-  //       });
-    
-  //       service.nearbySearch(requestAttractions, (results, status) => {
-  //         if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-  //           // fetchPlaceDetails(results || [], updateListOfAttractions);
-  //           updateListOfAttractions(results || []);
-  //         } else {
-  //           console.log('Nearby search failed with status:', status);
-  //         }
-  //       });
-  //     } catch (error) {
-  //       if(error) {
-  //         console.log(error);
-  //       }
-  //     }     
-  //   };
-  //   loadPlaces();
-  // }, [toLocation]);
-
   return (
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>            
@@ -154,8 +103,6 @@ export default function Searchbar({color, contrast}: {color: string, contrast: s
                     <PlaceAutocomplete onPlaceSelect={setFromPlace} apiKey={GOOGLE_MAPS_API_KEY} />
                 </Grid2>
                 <Grid2 size={{ xs: 6, sm: 1, md: 2 }}  sx={{ my: 3, ml:2}} >
-                  {/* <TextField variant="standard" placeholder="City, State, Country" value={localLocation} onChange={(e) => {setLocalLocation(e.target.value);}}
-                    sx={{ my: 3, ml: 4}} required></TextField>                      */}
                     <PlaceAutocomplete onPlaceSelect={setToPlace} apiKey={GOOGLE_MAPS_API_KEY} />
                 </Grid2>
                 <Box sx={{color: contrast, alignSelf:'center', width: 0, height: 50, border: `1px solid ${contrast}`, mx: 1 }}></Box>                    

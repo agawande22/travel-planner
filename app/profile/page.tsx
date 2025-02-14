@@ -13,14 +13,11 @@ import List from '@mui/material/List';
 import { ListItemText } from '@mui/material';
 import ProfilePic from '../component/profilepic';
 import { useUserState } from '../component/usercontext';
-import { useItineraryState } from '../component/tripcontext';
 import Itinerary from '../component/itinerary';
 
 export default function AccountForm() {
     const supabase = createClient();
     const {name, curLocation, email, picURL, updateName, updateCurLocation, updatePicURL} = useUserState();
-    const {location, itinerary, updateItinerary} = useItineraryState();
-    const [loading, setLoading] = useState(true);
     const [localName, setName] = useState<string | ''>(name);
     const [localCurLocation, setCurLocation] = useState<string | ''>(curLocation);
     const [localPicURL, setPicURL] = useState<string | ''>(picURL);
@@ -46,7 +43,7 @@ export default function AccountForm() {
         picURL: string | null
     }) {
         try {
-        setLoading(true);
+        // setLoading(true);
         const { error } = await supabase.from('profiles').upsert({
             id: user?.id as string,
             email: user?.email as string,
@@ -60,7 +57,7 @@ export default function AccountForm() {
         } catch (error) {
             alert(error);
         } finally {
-            setLoading(false);
+            // setLoading(false);
         }
     }
 

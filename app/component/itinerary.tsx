@@ -6,13 +6,13 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { useItineraryState } from './tripcontext';
-import { Key, useState } from 'react';
+import { useState } from 'react';
 import Grid2 from '@mui/material/Grid2';
 import Typography from '@mui/material/Typography';
 
 export default function Itinerary() {
     const [open, setOpen] = useState<{[key: string]: boolean}>({});
-    const {itineraries, updateItineraries, deleteItineraries} = useItineraryState();
+    const {itineraries, deleteItineraries} = useItineraryState();
 
     const handleClick = (loc: string) => {
         setOpen((prev) => ({

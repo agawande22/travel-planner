@@ -1,21 +1,18 @@
 'use client';
-import { useEffect, useState } from 'react';
 import Searchbar from '../component/searchbar';
-import { useSearchState } from '../component/searchcontext';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Weatherhandle from '../component/weatherhandler';
-import Maphandler from '../component/maphandler';
-import { Map, AdvancedMarker, InfoWindow } from '@vis.gl/react-google-maps';
 import Flighthandler from '../component/flighthandler';
 import Restauranthandler from '../component/restauranthandler';
 import Attractionshandler from '../component/attractionshandler';
 import GoogleMapComponent from '../component/maphandler';
 import Hotelhandler from '../component/hotelhandler';
+import { useState } from 'react';
   
-  const TABS_STORAGE_KEY = 'lastSelectedTab';
+  // const TABS_STORAGE_KEY = 'lastSelectedTab';
   const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ||'';
 
   interface TabPanelProps {
@@ -42,9 +39,8 @@ function a11yProps(index: number) {
 }
   
 
-export default function Searchresult(props: TabPanelProps) {
+export default function Searchresult() { // props: TabPanelProps
 
-    const {location, checkIn, checkOut, guests} = useSearchState();
     const [value, setValue] = useState<number>(0
   // () => {
   //     const savedTab = localStorage.getItem(TABS_STORAGE_KEY);

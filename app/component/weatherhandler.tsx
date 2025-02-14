@@ -8,10 +8,25 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import List from '@mui/material/List';
 import { ListItemText } from '@mui/material';
+import Image from 'next/image';
+
+interface WeatherResponse {
+    humidity: number;
+    sunrise: number;
+    sunset: number;
+    temp: {
+        min: number;
+        max: number;
+    };
+    weather: {
+        description: string;
+        icon: string;
+    }[];
+}
 
 export default function Weatherhandler() {
     const {toLocation} = useSearchState();
-    const [weather, setWeather] = useState<Array<object>>([]);
+    const [weather, setWeather] = useState<WeatherResponse[]>([]);
     const [outputIndex, setOutputIndex] = useState<number>(0);
     const today = new Date();
     const dayIndex = today.getDay(); 
@@ -68,7 +83,7 @@ export default function Weatherhandler() {
                 <Grid2 sx={{ flex: 0.5}}>
                     {weather?                       
                         (<Tooltip key={outputIndex} title={weather[outputIndex]?.weather[0].description}>
-                            <img  src={`https://openweathermap.org/img/wn/${weather[outputIndex]?.weather[0].icon}@2x.png`} alt='Weather' height={200} width={200}/>
+                            <Image  src={`https://openweathermap.org/img/wn/${weather[outputIndex]?.weather[0].icon}@2x.png`} alt='Weather' height={200} width={200}/>
                         </Tooltip>):(<></>)}
                 </Grid2>
             </Grid2>
@@ -81,7 +96,7 @@ export default function Weatherhandler() {
                                 <ListItemText key={`day-${index}`}><Typography key={`${daysOfWeek[(dayIndex+index)%7]}`}>{daysOfWeek[(dayIndex+index)%7]}</Typography></ListItemText>
                                 <ListItemText key={`Htemp-${index}`}><Typography>H: {value?.temp.max}°C</Typography></ListItemText>
                                 <ListItemText key={`Ltemp-${index}`}><Typography> L: {value?.temp.min}°C</Typography></ListItemText>
-                                <ListItemText key={`img-${index}`}><img  src={`https://openweathermap.org/img/wn/${weather[index].weather[0].icon}@2x.png`} alt='Weather' height={100} width={100}/></ListItemText>
+                                <ListItemText key={`img-${index}`}><Image  src={`https://openweathermap.org/img/wn/${weather[index].weather[0].icon}@2x.png`} alt='Weather' height={100} width={100}/></ListItemText>
                             </List>                           
                         </Button>
                         </Tooltip>

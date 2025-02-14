@@ -28,7 +28,7 @@ export async function GET(request: Request) {
     } catch (error) {
         if(error) {
             console.log(error);
-            return NextResponse.json({ message: error.description[0].title }, { status: error.response.statusCode });
+            return NextResponse.json({ message: 'something went wrong in hotel result backend' }, { status: 404 });
         } else {
             return NextResponse.json({ error: 'failed to fetch hotel offers' }, { status: 500 });
         }
