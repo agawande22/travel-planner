@@ -1,6 +1,6 @@
 'use client';
 
-import { GoogleMap, Marker, useJsApiLoader} from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader} from '@react-google-maps/api';
 import { useEffect, useState } from 'react';
 import { useSearchState } from './searchcontext';
 import { Box, Typography } from '@mui/material';

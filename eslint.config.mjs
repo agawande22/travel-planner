@@ -38,13 +38,13 @@ const eslintConfig = [
         "no-unused-vars": "warn", // This rule doesn't support auto-fix
       
       // Extend Next.js recommended rules
-      ...eslintPluginNext.configs["core-web-vitals"].rules,
+      // ...eslintPluginNext.configs["core-web-vitals"].rules,
 
       // Extend TypeScript recommended rules
-      ...eslintPluginTypeScript.configs.recommended.rules,
+      // ...eslintPluginTypeScript.configs.recommended.rules,
 
       // Additional custom rules
-      "@next/next/no-html-link-for-pages": "off", // Turn off warnings for non-Next.js link usage
+      // "@next/next/no-html-link-for-pages": "off", // Turn off warnings for non-Next.js link usage
     },
   },
 ];

@@ -18,19 +18,19 @@ interface Flight {
     price: { total: string };
 }
 
-interface Hotel {
-    available: boolean,
-    offers: {
-        price: {total: string };
-        room: {
-            typeEstimated: { 
-                bedType: string,
-                beds: number,
-                category: string
-            };
-        };
-    }[];
-}
+// interface Hotel {
+//     available: boolean,
+//     offers: {
+//         price: {total: string };
+//         room: {
+//             typeEstimated: { 
+//                 bedType: string,
+//                 beds: number,
+//                 category: string
+//             };
+//         };
+//     }[];
+// }
 
 interface ItineraryStateType {
     itineraries: Record<string, {  // Key: location string, Value: itinerary object

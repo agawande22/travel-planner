@@ -3,6 +3,7 @@ import { useSearchState } from './searchcontext';
 import Box from '@mui/material/Box';
 import { Button, Grid2, Link, List, ListItem, Typography } from '@mui/material';
 import { useItineraryState } from './tripcontext';
+import Image from 'next/image';
 
 // interface CustomPlaceResult extends google.maps.places.PlaceResult {
 //     imageUrl?: string | null;
@@ -41,7 +42,7 @@ export default function Restauranthandler() {
                         </Link>                       
                         <Grid2  sx={{display: 'flex', justifyContent: 'space-between'}}>                                                                 
                             <Box>
-                                <img src={restaurant?.photos?.[0].getUrl()} alt="" height={200} width={200}/>
+                                <Image src={`${restaurant?.photos?.[0].getUrl()}`} alt="" height={200} width={200}/>
                             </Box>
                             <Box>
                                 <List>
