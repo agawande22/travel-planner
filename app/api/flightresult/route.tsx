@@ -1,6 +1,7 @@
 import Amadeus from 'amadeus-ts';
 import { NextResponse } from 'next/server';
 
+const BASE_URL = process.env.NEXTAUTH_URL;
 // Initialize Amadeus client
 const amadeusClient = new Amadeus({
     clientId: process.env.NEXT_PUBLIC_AMADEUS_API_KEY,
@@ -19,7 +20,7 @@ export async function GET(request: Request) {
 
     try {
         // 1. Getting Origin Location Code
-        const data = await fetch(`http://localhost:3000/api/citycodes?keyword=${originKeyword}`);        
+        const data = await fetch(`${BASE_URL}/api/citycodes?keyword=${originKeyword}`);        
         const originResponse = await data.json();
         if (!originResponse.data || originResponse.data.length === 0) {
             return NextResponse.json({ error: 'No matching origin found' }, { status: 404 });
@@ -27,7 +28,7 @@ export async function GET(request: Request) {
         const originCode = originResponse.data[0].iataCode;
         
         // 2. Getting Destination Location Code
-        const destinationData = await fetch(`http://localhost:3000/api/citycodes?keyword=${destinationKeyword}`);
+        const destinationData = await fetch(`${BASE_URL}/api/citycodes?keyword=${destinationKeyword}`);
         const destinationResponse = await destinationData.json();
         if (!destinationResponse.data || destinationResponse.data.length === 0) {
             return NextResponse.json({ error: 'No matching destination found' }, { status: 404 });
