@@ -37,8 +37,8 @@ export default function Restauranthandler() {
                         </Link> 
                         <Grid2  sx={{display: 'flex', justifyContent: 'space-between'}}>                                                                 
                             <Box>
-                                {attraction?.photos?( <Image src={`${attraction.photos[0].getUrl()}`} alt="" height={200} width={200}/>):(
-                                    <Image src={`${attraction.icon}`} alt="" height={200} width={200}/>
+                                {attraction.photos?( <Image src={`${attraction?.photos[0].getUrl()}`} alt="" height={200} width={200}/>):(
+                                    <Image src={`${attraction?.icon}`} alt="" height={200} width={200}/>
                                 )}
                                 
                             </Box>
