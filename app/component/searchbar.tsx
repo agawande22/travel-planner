@@ -99,11 +99,11 @@ export default function Searchbar({color, contrast}: {color: string, contrast: s
           <Grid2 display={'flex'} gap={2}>
             <Box  sx={{ flex:1.5, height: 80, bgcolor: color, border: '2px solid black', borderRadius: 10, minWidth: '800px'}}>
               <Grid2 container spacing={1} >
-                <Grid2 size={{ xs: 6, sm: 1, md: 2 }} sx={{ my: 3, ml: 4}}>
-                    <PlaceAutocomplete onPlaceSelect={setFromPlace} apiKey={GOOGLE_MAPS_API_KEY} />
+                <Grid2 size={{ xs: 6, sm: 1, md: 2 }} sx={{ display:'flex', gap: 1, my: 3, ml: 4}}>
+                    <Typography>From:</Typography><PlaceAutocomplete onPlaceSelect={setFromPlace} apiKey={GOOGLE_MAPS_API_KEY} />
                 </Grid2>
-                <Grid2 size={{ xs: 6, sm: 1, md: 2 }}  sx={{ my: 3, ml:2}} >
-                    <PlaceAutocomplete onPlaceSelect={setToPlace} apiKey={GOOGLE_MAPS_API_KEY} />
+                <Grid2 size={{ xs: 6, sm: 1, md: 2 }}  sx={{ display:'flex', gap: 1, my: 3, ml: 2}} >
+                  <Typography>To:</Typography><PlaceAutocomplete onPlaceSelect={setToPlace} apiKey={GOOGLE_MAPS_API_KEY} />
                 </Grid2>
                 <Box sx={{color: contrast, alignSelf:'center', width: 0, height: 50, border: `1px solid ${contrast}`, mx: 1 }}></Box>                    
                 <Grid2 size={{ xs: 6, sm: 1, md: 2 }}  >

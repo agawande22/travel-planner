@@ -82,9 +82,9 @@ export default function AccountForm() {
             pic_url: picURL
         });
         if (error) throw error; 
-            alert('Profile updated!');
+            console.log('Profile updated!');
         } catch (error) {
-            alert(error);
+            console.log(error);
         } finally {
             // setLoading(false);
         }
