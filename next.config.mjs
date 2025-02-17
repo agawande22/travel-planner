@@ -11,9 +11,9 @@ const nextConfig = {
           },
           {
             protocol: 'https',
-            hostname: 'lh5.googleusercontent.com',
+            hostname: 'maps.googleapis.com',
             port: '',
-            pathname: '/p/**'
+            pathname: ''
           },
         ],
       },
