@@ -21,7 +21,7 @@ import { useUserState } from '../../component/usercontext';
 import { User } from '@supabase/supabase-js';
 
 export default function Signin(): JSX.Element {
-    const {name, updateName, updateCurLocation, updateEmail, updatePicURL} = useUserState();
+    const {name, updateEmail} = useUserState();
     const [loginEmail, setLoginEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [showPassword, setShowPassword] = useState(false);
@@ -82,7 +82,7 @@ export default function Signin(): JSX.Element {
             console.log('Google sign-in successful');
             updateEmail(loginEmail);   
             getUser();        
-            getProfile();
+            // getProfile();
         }
     };
     const handleClickShowPassword = () => setShowPassword((show) => !show); 
