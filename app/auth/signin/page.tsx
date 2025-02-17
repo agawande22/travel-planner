@@ -82,7 +82,6 @@ export default function Signin(): JSX.Element {
             console.log('Google sign-in successful');
             updateEmail(loginEmail);   
             getUser();        
-            // getProfile();
         }
     };
     const handleClickShowPassword = () => setShowPassword((show) => !show); 
