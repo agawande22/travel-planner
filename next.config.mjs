@@ -9,6 +9,12 @@ const nextConfig = {
             pathname: '/img/wn/**',
             search: '',
           },
+          {
+            protocol: 'https',
+            hostname: 'google.com',
+            port: '',
+            pathname: '/maps/place/**'
+          },
         ],
       },
 };

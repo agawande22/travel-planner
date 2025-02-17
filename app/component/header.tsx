@@ -24,10 +24,13 @@ import AirplaneTicketIcon from '@mui/icons-material/AirplaneTicket';
 import { createClient } from '../../utils/superbase/client';
 import { useEffect, useState } from 'react';
 import { User } from '@supabase/supabase-js';
+import { useUserState } from './usercontext';
+import Image from 'next/image';
 
 const pages = ['Home', 'About', 'Explore'];
 
 function Header () {
+    const {picURL} = useUserState();
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
     const [user, setUser] = useState<User|null>(null);   
@@ -109,7 +112,11 @@ function Header () {
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="" />
+                                {picURL ? (
+                                    <Image  src={picURL} alt="Profile" width='200' height='200'/>
+                                ) : (
+                                    <Avatar alt="Remy Sharp" src="" />
+                                )}
                             </IconButton>
                             </Tooltip>
                             <Menu sx={{ mt: '45px' }} id="menu-appbar" anchorEl={anchorElUser} anchorOrigin={{ vertical: 'top', horizontal: 'right',}}
@@ -118,9 +125,6 @@ function Header () {
                                 <List>
                                     <ListItemButton href='/profile'>
                                         <ListItemText primary='Profile'/>
-                                    </ListItemButton>
-                                    <ListItemButton>
-                                        <ListItemText primary='Dashboard' />
                                     </ListItemButton>
                                     <ListItemButton>
                                         <ListItemText primary='Signout' onClick={handleSignout} />

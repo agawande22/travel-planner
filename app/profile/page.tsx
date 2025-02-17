@@ -12,15 +12,16 @@ import Fade from '@mui/material/Fade';
 import List from '@mui/material/List';
 import { ListItemText } from '@mui/material';
 import ProfilePic from '../component/profilepic';
-import { useUserState } from '../component/usercontext';
+// import { useUserState } from '../component/usercontext';
 import Itinerary from '../component/itinerary';
+import { useUserState } from '../component/usercontext';
 
 export default function AccountForm() {
     const supabase = createClient();
-    const {name, curLocation, email, picURL, updateName, updateCurLocation, updatePicURL} = useUserState();
-    const [localName, setName] = useState<string | ''>(name);
-    const [localCurLocation, setCurLocation] = useState<string | ''>(curLocation);
-    const [localPicURL, setPicURL] = useState<string | ''>(picURL);
+    const {name, curLocation, picURL, updateName, updateCurLocation, updatePicURL} = useUserState();
+    const [localName, setLocalName] = useState<string | ''>('');
+    const [localCurLocation, setLocalCurLocation] = useState<string | ''>('');
+    const [localPicURL, setLocalPicURL] = useState<string | ''>('');
     const [user, setUser] = useState<User|null>(null);   
     const [anchorFormDisplay, setAnchorFormDisplay] = useState<true | false>(false);
 
@@ -32,8 +33,36 @@ export default function AccountForm() {
             }
         }; 
         getUser(); 
-        console.log('picurl',picURL);
-    },[picURL, supabase.auth]);
+        console.log('picurl',localPicURL);
+    },[localPicURL, supabase.auth]);
+
+    useEffect(()=>{
+        const getProfile = async () => {  // Get profile from database
+            try {             
+              const { data, error, status } = await supabase
+                .from('profiles')
+                .select('email, name, cur_location, pic_url')
+                .eq('id', user?.id)
+                .single();
+        
+              if (error && status !== 406) {
+                console.log(error);
+                throw error;
+              }
+        
+              if (data) {
+                setLocalName(data.name);
+                setLocalCurLocation(data.cur_location);
+                setLocalPicURL(data.pic_url);
+              }
+            } catch (error) {
+              alert(error);
+            }
+        };
+        if (user) {
+            getProfile();
+        }
+    }, [user, supabase]);
 
     async function updateProfile({  // Update profile to the database
         name, curLocation, picURL
@@ -61,12 +90,13 @@ export default function AccountForm() {
         }
     }
 
+
     const handleFormDisplay = () => {
         setAnchorFormDisplay((prev) => !prev);
     };
 
     const handleFormSubmit = () => {
-        updateProfile({name:name, curLocation:curLocation, picURL});
+        updateProfile({name:localName, curLocation:localCurLocation, picURL:localPicURL});
         updateName(localName);
         updateCurLocation(localCurLocation);
         
@@ -74,8 +104,8 @@ export default function AccountForm() {
     };
 
     const handlePicUpload = (url: string) => {
-        setPicURL(url);
-        updatePicURL(localPicURL);
+        setLocalPicURL(url);
+        updatePicURL(url);
         updateProfile({ name, curLocation, picURL: url });
     };
 
@@ -83,9 +113,9 @@ export default function AccountForm() {
         <Box sx={{width: '350px', px:5, pt:7}}>
             <Typography variant="h6" sx={{color: 'black'}}>Update profile</Typography>
             <TextField id="outlined-basic" label="Full name" variant="outlined" required fullWidth
-                        defaultValue="" onChange={(e) => setName(e.target.value)} sx={{display: 'block', width:'500', my: 5}}/>
+                        defaultValue="" onChange={(e) => setLocalName(e.target.value)} sx={{display: 'block', width:'500', my: 5}}/>
             <TextField id="outlined-basic" label="Current location" variant="outlined" required fullWidth
-                        defaultValue="" onChange={(e) => setCurLocation(e.target.value)} sx={{display: 'block', my: 5}}/>  
+                        defaultValue="" onChange={(e) => setLocalCurLocation(e.target.value)} sx={{display: 'block', my: 5}}/>  
             <Button sx={{width: 100, bgcolor: 'black', borderRadius: 10, textTransform: 'none', display: 'block', my: 5}} onClick={handleFormSubmit}>
                     <Typography variant='body1' color='white' fontSize={20}> Update </Typography>
             </Button>            
@@ -95,9 +125,9 @@ export default function AccountForm() {
     const displayForm = (        
         <Box sx={{ width: '400px', px:5, pt:7}}>
             <List >
-                <ListItemText primary={`Name: ${name}`} slotProps={{primary: {sx:{fontSize: 20}}}}/>
-                <ListItemText primary={`Email: ${email}`} slotProps={{primary: {sx:{fontSize: 20}}}} />
-                <ListItemText primary={`Current location: ${curLocation}`} slotProps={{primary: {sx:{fontSize: 20}}}} />
+                <ListItemText primary={`Name: ${localName}`} slotProps={{primary: {sx:{fontSize: 20}}}}/>
+                <ListItemText primary={`Email: ${user?.email}`} slotProps={{primary: {sx:{fontSize: 20}}}} />
+                <ListItemText primary={`Current location: ${localCurLocation}`} slotProps={{primary: {sx:{fontSize: 20}}}} />
             </List>
             <Button sx={{width: 100, bgcolor: 'black', borderRadius: 10, textTransform: 'none', display: 'block', my: 5}} onClick={handleFormDisplay}>
                     <Typography variant='body1' color='white' fontSize={20}> Edit </Typography>
