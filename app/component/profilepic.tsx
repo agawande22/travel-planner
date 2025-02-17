@@ -12,8 +12,8 @@ export default function ProfilePic({ uid, url, onUpload, }: {
                                       url: string | ''
                                       onUpload: (url: string) => void }) {
   const supabase = createClient();
-  const {picURL, updatePicURL} = useUserState();
-  const [localPicURL, setLocalPicURL] = useState<string | ''>(picURL);
+  const {updatePicURL} = useUserState();
+  const [localPicURL, setLocalPicURL] = useState<string | ''>(url);
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
@@ -25,14 +25,16 @@ export default function ProfilePic({ uid, url, onUpload, }: {
         }
         const url = URL.createObjectURL(data);
         setLocalPicURL(url);
-        console.log('downloaded picurl',picURL);
+        console.log('downloaded picurl', localPicURL);
+        
       } catch (error) {
         console.log('Error downloading image: ', error);
       }
     }
 
-    if (url) downloadImage(url);
-  }, [url, supabase, picURL]);
+  if (url) downloadImage(url);
+    
+}, [url]);
 
   const uploadPic: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
     try {
@@ -56,13 +58,14 @@ export default function ProfilePic({ uid, url, onUpload, }: {
       alert(error);
     } finally {
       setUploading(false);
+      window.location.href = '/profile'; 
     }
   };
 
   return (
     <Box sx={{height: 'inherit', width: 'inherit',alignContent:'center', justifyContent:'center'}}>
-      {picURL ? (
-        <Image  src={picURL} alt="Profile" width='200' height='200'/>
+      {localPicURL ? (
+        <Image  src={localPicURL} alt="Profile" width='200' height='200'/>
       ) : (
         <PersonIcon color='disabled' sx={{height:'inherit', width:'inherit'}}/>
       )}

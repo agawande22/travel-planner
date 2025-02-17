@@ -35,36 +35,36 @@ export default function Signin(): JSX.Element {
         }
     }; 
 
-    const getProfile = useCallback(async () => {  // Get profile from database
-        try {             
-          const { data, error, status } = await supabase
-            .from('profiles')
-            .select('email, name, cur_location, pic_url')
-            .eq('id', user?.id)
-            .single();
+    // const getProfile = useCallback(async () => {  // Get profile from database
+    //     try {             
+    //       const { data, error, status } = await supabase
+    //         .from('profiles')
+    //         .select('email, name, cur_location, pic_url')
+    //         .eq('id', user?.id)
+    //         .single();
     
-          if (error && status !== 406) {
-            console.log(error);
-            throw error;
-          }
+    //       if (error && status !== 406) {
+    //         console.log(error);
+    //         throw error;
+    //       }
     
-          if (data) {
-            updateName(data.name);
-            updateEmail(data.email);
-            updateCurLocation(data.cur_location);
-            updatePicURL(data.pic_url);
-          }
-        } catch (error) {
-          alert(error);
-        }
-    }, [user, supabase, updateName, updateEmail, updateCurLocation, updatePicURL]);
+    //       if (data) {
+    //         updateName(data.name);
+    //         updateEmail(data.email);
+    //         updateCurLocation(data.cur_location);
+    //         updatePicURL(data.pic_url);
+    //       }
+    //     } catch (error) {
+    //       alert(error);
+    //     }
+    // }, [user, supabase, updateName, updateEmail, updateCurLocation, updatePicURL]);
 
     const handleSignin = async () => {        
         await signin({email: loginEmail, password: password });
         getUser();
-        if (user) {
-            await getProfile();
-        }
+        // if (user) {
+        //     await getProfile();
+        // }
         window.location.href = '/'; 
         console.log(name);
     };
