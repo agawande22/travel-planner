@@ -13,7 +13,7 @@ const nextConfig = {
             protocol: 'https',
             hostname: 'google.com',
             port: '',
-            pathname: '/maps/place/**'
+            pathname: '/maps/place/?q=place_id:**'
           },
         ],
       },
