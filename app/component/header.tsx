@@ -113,7 +113,7 @@ function Header () {
                             <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                 {picURL ? (
-                                    <Image  src={picURL} alt="Profile" width='50' height='50'/>
+                                    <Image  src={picURL} alt="Profile" width='50' height='50' sx={{borderRadius: '50%'}}/>
                                 ) : (
                                     <Avatar alt="Remy Sharp" src="" />
                                 )}
