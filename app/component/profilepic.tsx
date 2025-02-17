@@ -25,6 +25,7 @@ export default function ProfilePic({ uid, url, onUpload, }: {
         }
         const url = URL.createObjectURL(data);
         setLocalPicURL(url);
+        updatePicURL(url);
         console.log('downloaded picurl', localPicURL);
         
       } catch (error) {
