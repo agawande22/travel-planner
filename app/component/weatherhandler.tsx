@@ -67,7 +67,7 @@ export default function Weatherhandler() {
             <Grid2 key={'weather-tile'} sx={{ border: '3px solid grey', borderRadius: 5,  display: 'flex', justifyContent: 'space-between', gap: 2}}>
                 <Grid2 sx={{m: 5}}>
                     <Typography variant='h5'>{daysOfWeek[(dayIndex+outputIndex)%7]}</Typography>
-                    <Typography>{today.toJSON().slice(0, 10)}</Typography>
+                    <Typography>{today.toJSON().slice(0, 8)}{parseInt(today.toJSON().slice(8, 10)) + ((outputIndex)%7)}</Typography>
                     <Typography>{toLocation?.name}</Typography>
                 </Grid2>
                 <Grid2 sx={{ flex: 0.5, display: 'flex', justifyContent: 'right', my: 5}}>
